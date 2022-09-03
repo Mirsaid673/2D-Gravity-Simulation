@@ -3,7 +3,9 @@
 int Input::last_keys_state[348];
 int Input::last_mouse_butons_state[8];
 GLFWwindow *Input::window;
+glm::ivec2 Input::cursor_last_pos;
 glm::ivec2 Input::cursor_pos;
+int Input::muouse_scroll;
 
 void Input::init(const Window &_window)
 {
@@ -21,6 +23,10 @@ void Input::init(const Window &_window)
     double x, y;
     glfwGetCursorPos(window, &x, &y);
     cursor_pos = glm::ivec2(x, y);
+    cursor_last_pos = cursor_pos;
+
+    glfwSetScrollCallback(window, mouseScrollCallback);
+    muouse_scroll = 0.0;
 }
 
 void Input::update()
@@ -37,5 +43,13 @@ void Input::update()
 
     double x, y;
     glfwGetCursorPos(window, &x, &y);
+    cursor_last_pos = cursor_pos;
     cursor_pos = glm::ivec2(x, y);
+    muouse_scroll = 0.0;
+}
+
+
+void Input::mouseScrollCallback(GLFWwindow *wnd, double, double y_offset)
+{
+    muouse_scroll = y_offset;
 }

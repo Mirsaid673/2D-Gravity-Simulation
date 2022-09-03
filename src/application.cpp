@@ -30,7 +30,8 @@ void Application::app_init()
 {
     main_window.init(800, 800, "openGL");
     Input::init(main_window);
-    Shader::initDefaultShader("../resource/shaders/default.vert", "../resource/shaders/default.frag");
+    Shader::texture_shader.load("../resource/shaders/texture.vert", "../resource/shaders/texture.frag");
+    Shader::color_shader.load("../resource/shaders/color.vert", "../resource/shaders/color.frag");
     GUI::init(main_window);
 
     float w = (float)main_window.getWidth();

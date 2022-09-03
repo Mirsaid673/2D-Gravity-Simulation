@@ -17,7 +17,11 @@ private:
     static int last_keys_state[348];
     static int last_mouse_butons_state[8];
     static GLFWwindow *window;
+    static glm::ivec2 cursor_last_pos;
     static glm::ivec2 cursor_pos;
+    static int muouse_scroll;
+
+    static void mouseScrollCallback(GLFWwindow *wnd, double, double y_offset);
 
 public:
     static void init(const Window &_window);
@@ -35,5 +39,8 @@ public:
     static bool getMouseButtonPress(int mouse_button) { return getMouseButton(mouse_button) == PRESS && last_mouse_butons_state[mouse_button] == RELEASE; }
     static bool getMouseButtonRelease(int mouse_button) { return getMouseButton(mouse_button) == RELEASE && last_mouse_butons_state[mouse_button] == PRESS; }
 
-    static glm::ivec2 getCursorPos() {return cursor_pos;}
+    static glm::ivec2 getCursorPos() { return cursor_pos; }
+    static glm::ivec2 getCursorLastPos() { return cursor_last_pos; }
+    static glm::ivec2 getCursorOffset() { return cursor_pos - cursor_last_pos; }
+    static int getMouseScroll() { return muouse_scroll; }
 };

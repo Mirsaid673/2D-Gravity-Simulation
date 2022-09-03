@@ -23,5 +23,5 @@ public:
         sprite.draw();
     }
 
-    Model() : shader(&Shader::default_shader){}
+    Model() : shader(&Shader::texture_shader){}
 };

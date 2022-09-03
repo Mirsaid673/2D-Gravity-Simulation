@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 set(PROJECT_NAME GameEngine)
 set(EXECUTABLE out)
-set(CXX_STANDARD 14)
+set(CXX_STANDARD 11)
 
 
 set(LIBRARIES GL GLEW glfw)

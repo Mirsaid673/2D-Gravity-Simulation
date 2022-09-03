@@ -32,7 +32,7 @@ void Sprite::load(const LoadConfguration &lc, const Texture &t)
 	mesh.load(v, i);
 }
 
-void Sprite::load(const Mesh2D &m, const Texture &t)
+void Sprite::load(const Mesh2D<Vertex2D> &m, const Texture &t)
 {
 	mesh = m;
 	texture = t;

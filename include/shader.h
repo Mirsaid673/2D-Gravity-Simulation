@@ -17,8 +17,8 @@ private:
 	GLuint ID;
 
 public:
-	static void initDefaultShader(const char *v, const char *f) { default_shader.load(v, f); }
-	static Shader default_shader;
+	static Shader texture_shader;
+	static Shader color_shader;
 
 	Shader() {}
 	Shader(const char *vertexFile, const char *fragmentFile);

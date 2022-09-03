@@ -10,7 +10,7 @@
 class Sprite
 {
 private:
-	Mesh2D mesh;
+	Mesh2D<Vertex2D> mesh;
 	Texture texture;
 
 public:
@@ -22,11 +22,11 @@ public:
 	};
 
 	Sprite() {}
-	Sprite(const Mesh2D &m, const Texture &t) : mesh(m), texture(t) {}
+	Sprite(const Mesh2D<Vertex2D> &m, const Texture &t) : mesh(m), texture(t) {}
 	Sprite(const char *path, const LoadConfguration &lc);
 	Sprite(const char *path);
 
-	void load(const Mesh2D &m, const Texture &t);
+	void load(const Mesh2D<Vertex2D> &m, const Texture &t);
 	void load(const LoadConfguration &lc, const Texture &t);
 	void load(const char *path, const LoadConfguration &lc);
 	void load(const char *path);
