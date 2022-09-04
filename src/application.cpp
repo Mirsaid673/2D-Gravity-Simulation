@@ -7,7 +7,7 @@ int Application::run()
     app_init();
     init();
 
-    float clear_color[3]{0.3f, 0.5f, 0.75f};
+    float clear_color[3]{0.2f, 0.3f, 0.6f};
     while (run_app && main_window.shouldClose() == 0)
     {
         glViewport(0, 0, main_window.getWidth(), main_window.getHeight());

@@ -11,7 +11,6 @@ class MyGame : public Application
     {
         const int quality = 30;
         camera.scale = (float)main_window.getWidth() / 50;
-        space.color = glm::vec3(0.5);
     }
     void update() override
     {
@@ -51,13 +50,13 @@ class MyGame : public Application
 
         ImGui::Begin("properties");
 
-        ImGui::InputFloat("G", &space.gravity_const);
+        ImGui::DragFloat("G", &space.gravity_const, 1.0f, 0.0f, 100000000.0f);
         ImGui::ColorEdit3("color", &space.color.x);
-        ImGui::InputFloat("mass", &space.mass);
-        ImGui::InputFloat("radius", &space.radius);
-        ImGui::InputFloat2("position", &space.pos.x);
-        ImGui::InputFloat2("velocity", &space.velocity.x);
-        ImGui::InputFloat2("acceleration", &space.acceleration.x);
+        ImGui::DragFloat("mass", &space.mass, 0.5f, 1.0f, 100000000.0f);
+        ImGui::DragFloat("radius", &space.radius, 0.3f, 0.001, 100000000.0f);
+        ImGui::DragFloat2("position", &space.pos.x);
+        ImGui::DragFloat2("velocity", &space.velocity.x);
+        ImGui::DragFloat2("acceleration", &space.acceleration.x);
 
         to_add = ImGui::Button("add");
 
