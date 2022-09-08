@@ -1,5 +1,3 @@
 # 2D-Gravity-Simulation
 openGL C++
-
-https://user-images.githubusercontent.com/55046386/189079318-15407d09-dbbd-44b7-8e9a-5f624ae6c838.mp4
-
+![Peek-2022-09-08-18-49](https://user-images.githubusercontent.com/55046386/189079822-1ae7507f-9e5e-4727-9428-80d4fa1e469b.gif)
