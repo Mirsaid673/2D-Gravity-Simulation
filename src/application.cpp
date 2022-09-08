@@ -7,17 +7,42 @@ int Application::run()
     app_init();
     init();
 
-    float clear_color[3]{0.2f, 0.3f, 0.6f};
     while (run_app && main_window.shouldClose() == 0)
     {
-        glViewport(0, 0, main_window.getWidth(), main_window.getHeight());
+        update();
+
+        framebuffer.resize(viewport_size.x, viewport_size.y);
+        framebuffer.bind();
+
+        glViewport(0, 0, viewport_size.x, viewport_size.y);
         glClearColor(clear_color[0], clear_color[1], clear_color[2], 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        update();
-        app_update();
+        camera.width = viewport_size.x;
+        camera.height = viewport_size.y;
+        camera.update();
         draw();
-        main_window.swapBuffers();
+
+        framebuffer.unbind();
+
+        glViewport(0, 0, main_window.getWidth(), main_window.getHeight());
+        glClearColor(app_clear_color[0], app_clear_color[1], app_clear_color[2], 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        GUI::newFrame();
+        ImGui::Begin("scene");
+
+        ImVec2 s = ImGui::GetContentRegionAvail();
+        viewport_size = glm::ivec2(s.x, s.y);
+        viewport_pos.x = (ImGui::GetWindowPos().x + ImGui::GetCursorPos().x);
+        viewport_pos.y = (ImGui::GetWindowPos().y + ImGui::GetCursorPos().y);
+        ImGui::Image(reinterpret_cast<ImTextureID>(framebuffer.getTexID()), s, ImVec2(0, 1), ImVec2(1, 0));
+
+        ImGui::End();
+
+        drawUI();
+        GUI::renderFrame();
+
+        app_update();
     }
 
     app_cleanup();
@@ -37,47 +62,27 @@ void Application::app_init()
     float w = (float)main_window.getWidth();
     float h = (float)main_window.getHeight();
 
-    if (w > h)
-    {
-        w /= h;
-        h = 1.0f;
-    }
-    else
-    {
-        h /= w;
-        w = 1;
-    }
-    camera.scale = 2;
+    camera.scale = 1;
     camera.width = w;
     camera.height = h;
-    camera.update();
+
+    viewport_pos = glm::ivec2(0);
+    viewport_size.x = w;
+    viewport_size.y = h;
+
+    framebuffer.create(w, h);
 }
 
 void Application::app_update()
 {
     main_window.updateSize();
-    float w = (float)main_window.getWidth();
-    float h = (float)main_window.getHeight();
-
-    if (w > h)
-    {
-        w /= h;
-        h = 1.0f;
-    }
-    else
-    {
-        h /= w;
-        w = 1;
-    }
-    camera.width = w;
-    camera.height = h;
-    camera.update();
-
     Input::update();
+    main_window.swapBuffers();
 }
 
 void Application::app_cleanup()
 {
     GUI::cleanup();
+    framebuffer.destroy();
     main_window.cleanup();
 }

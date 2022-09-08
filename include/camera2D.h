@@ -16,6 +16,9 @@ public:
 	Camera2D() : projection(1.0f) {}
 
 	void update();
+	void updateKeep();
+	void updateKeepWidth();
+	void updateKeepHeight();
 
 	const glm::mat4 &getProjection() const { return projection; }
 };

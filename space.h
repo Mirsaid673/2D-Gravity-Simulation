@@ -13,7 +13,6 @@ public:
     glm::vec3 color = glm::vec3(0.0f);
     glm::vec2 pos = glm::vec2(0.0f);
     glm::vec2 velocity = glm::vec2(0.0f);
-    glm::vec2 acceleration = glm::vec2(0.0f);
     float mass = 1.0f;
     float radius = 0.5f;
     int quality = 15;
@@ -26,7 +25,7 @@ public:
         SpaceBody &last = bodies.back();
         last.transform.position = pos;
         last.velocity = velocity;
-        last.acceleration = acceleration;
+        last.acceleration = glm::vec2(0.0f);
         last.mass = mass;
     }
 
