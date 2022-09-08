@@ -21,8 +21,6 @@ class MyGame : public Application
 
         space.update_physics(1.0 / 60.0);
 
-        std::cout << viewport_pos.x << '\t' << viewport_pos.y << std::endl;
-
         if (Input::getMouseButtonRelease(GLFW_MOUSE_BUTTON_LEFT))
             if (isInside(viewport_pos, viewport_size, Input::getCursorPos()))
                 space.pos = getCursorWorldPosition(Input::getCursorPos() - viewport_pos) + camera.transform.position;
