@@ -29,7 +29,8 @@ class MyGame : public Application
             run_app = false;
         // camera update
         if (Input::getMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT))
-            camera.transform.position -= getCursorWorldOffset(Input::getCursorOffset());
+            if (isInside(viewport_pos, viewport_size, Input::getCursorPos()))
+                camera.transform.position -= getCursorWorldOffset(Input::getCursorOffset());
 
         int scroll_dir = Input::getMouseScroll();
 
@@ -54,7 +55,7 @@ class MyGame : public Application
         ImGui::DragFloat2("position", &space.pos.x);
         ImGui::DragFloat2("velocity", &space.velocity.x);
 
-        to_add = ImGui::Button("add");
+        to_add = ImGui::Button("add", ImVec2(ImGui::GetWindowContentRegionWidth(), 0));
 
         ImGui::End();
     }
