@@ -16,7 +16,7 @@ struct Vertex2D
 struct ColoredVertex2D
 {
 	glm::vec2 position;
-	glm::vec3 color;
+	//glm::vec3 color; //color is seted by glAttrib
 };
 
 template <class T = Vertex2D>
@@ -31,6 +31,7 @@ private:
 	GLenum mode = GL_TRIANGLES;
 
 public:
+	glm::vec3 color;
 	Mesh2D() {}
 	Mesh2D(const std::vector<T> &v, const std::vector<GLuint> &i);
 	void load(const std::vector<T> &v, const std::vector<GLuint> &i);
@@ -44,4 +45,5 @@ public:
 	static Mesh2D<ColoredVertex2D> createAABB(const glm::vec2 &left_top, const glm::vec2 &right_bottom, const glm::vec3 &color);
 
 	static Mesh2D<ColoredVertex2D> createCircle(float radius, int quality, const glm::vec3 &color);
+	static Mesh2D<ColoredVertex2D> createLine();
 };

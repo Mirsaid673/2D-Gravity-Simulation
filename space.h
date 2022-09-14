@@ -1,16 +1,18 @@
 #pragma once
 
 #include "space_body.h"
+#include "utils.h"
 
 class Space
 {
-private:
-    std::vector<SpaceBody> bodies;
-
 public:
+    static const char *default_name;
+
+    char name[SpaceBody::name_size];
+    std::vector<SpaceBody> bodies;
     const Shader *shader;
 
-    glm::vec3 color = glm::vec3(0.0f);
+    glm::vec3 color = glm::vec3(1.0f, 1.0f, 0.0f);
     glm::vec2 pos = glm::vec2(0.0f);
     glm::vec2 velocity = glm::vec2(0.0f);
     float mass = 1.0f;
@@ -21,12 +23,15 @@ public:
 
     void add()
     {
-        bodies.push_back(SpaceBody(color, radius, quality));
+        bodies.push_back(SpaceBody(name, color, radius, quality));
         SpaceBody &last = bodies.back();
         last.transform.position = pos;
         last.velocity = velocity;
         last.acceleration = glm::vec2(0.0f);
         last.mass = mass;
+
+        strcpy(name, default_name);
+        concat_str(name, std::to_string(bodies.size()).c_str());
     }
 
     void update_physics(float delta)
@@ -64,5 +69,11 @@ public:
         }
     }
 
-    Space() : shader(&Shader::color_shader) {}
+    Space() : shader(&Shader::color_shader)
+    {
+        strcpy(name, default_name);
+        concat_str(name, std::to_string(bodies.size()).c_str());
+    }
 };
+
+ const char *Space::default_name = "object ";

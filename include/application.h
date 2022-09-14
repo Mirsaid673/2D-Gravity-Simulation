@@ -33,7 +33,7 @@ protected:
     Window main_window;
     Camera2D camera;
     Framebuffer framebuffer;
-    glm::vec3 clear_color = glm::vec3(0.2f, 0.3f, 0.6f);
+    glm::vec3 clear_color;
     glm::ivec2 viewport_pos;
     glm::ivec2 viewport_size;
 
